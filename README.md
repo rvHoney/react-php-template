@@ -28,8 +28,8 @@ React PHP Template est un template pour créer rapidement la structure d'un proj
 - [x] Intéractions avec la base de données
 - [x] Gestion des logs
 - [x] Gestion des erreurs
-- [] Création de clés API
-- [] Interface graphique d'administration
+- [ ] Création de clés API
+- [ ] Interface graphique d'administration
 
 ## Installation 📥
 1. Cloner le projet
