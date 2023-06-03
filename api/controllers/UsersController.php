@@ -1,5 +1,4 @@
 <?php
-require_once 'models/User.php'; // Inclusion du modèle User
 require_once 'helpers/ApiResponse.php'; // Classe permettant de gérer les réponses de l'API
 require_once 'models/Database.php'; // On importe la classe Database
 

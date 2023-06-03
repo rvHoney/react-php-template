@@ -16,7 +16,6 @@ import NotFound from './pages/NotFound';
 
 // Création du routeur
 // AJOUTER LES ROUTES ICI
-// on config la page not found
 const router = createBrowserRouter([
   {
     path: "/",

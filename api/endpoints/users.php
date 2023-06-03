@@ -21,7 +21,7 @@ if ($requestUri === '/users' && $requestMethod === 'GET')
     $userController->getUsers();
 }
 
-// GET /user/{id}
+// GET /user/1
 // Endpoint pour obtenir un utilisateur par son ID
 elseif (preg_match('/^\/user\/(\d+)$/', $requestUri, $matches) && $requestMethod === 'GET')
 {
