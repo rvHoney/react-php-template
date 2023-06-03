@@ -149,7 +149,6 @@ class Database
 
 ## Structure du projet 📁
 ### Serveur
-fin après data
 ```bash
 api
 ├── config
