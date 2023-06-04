@@ -1,5 +1,5 @@
 <?php
-class UserController
+class UserEndpointController
 {
     private $db;
 
