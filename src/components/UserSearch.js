@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import MemberCard from "./MemberCard";
+import UserCard from "./UserCard";
 import { API_URL } from "../utils/constants"; // Constante contenant le lien vers l'API
 
 
-export default function MemberSearch() {
+export default function UserSearch() {
     return (
         <div>
-            <h2>MemberSearch</h2>
+            <h2>User Search</h2>
             <Search />
         </div>
     );
 }
 
 function Search() {
-    const [member, setMember] = useState("");
+    const [user, setUser] = useState("");
     const [search, setSearch] = useState("");
 
     function handleSubmit(event) {
@@ -23,17 +23,17 @@ function Search() {
             .then((response) => response.json())
             .then((data) => {
                 if (data['status'] !== 200) {
-                    setMember(<p>Member not found</p>);
+                    setUser(<p>User not found</p>);
                     return;
                 }
 
                 // On met à jour le state
-                setMember(
-                    <MemberCard {...data['data']} />
+                setUser(
+                    <UserCard {...data['data']} />
                 );
             })
             .catch((error) => {
-                setMember(<p>Member not found</p>);
+                setUser(<p>User not found</p>);
             });
     }
     return (
@@ -44,7 +44,7 @@ function Search() {
                 <button type="submit">Search</button>
             </form>
 
-            {member}
+            {user}
         </>
     );
 }

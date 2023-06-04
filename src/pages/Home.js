@@ -1,12 +1,12 @@
 export default function Home() {
-  function handleClick() {
-    window.location.href = "/members";
+  function handleClick(page) {
+    window.location.href = page;
   }
-
     return (
       <div>
-        <h1>Home</h1>
-        <button onClick={handleClick}>Click to go to the members page</button>
+        <h1>Accueil</h1>
+        <button onClick={() => handleClick("users")}>Page des membres (démo)</button>
+        <button onClick={() => handleClick("rptpanel")}>Panel Web (Soon)</button>
       </div>
     );
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { API_URL } from "../utils/constants"; // Constante contenant le lien vers l'API
 
-export default function MemberAdd() {
+export default function UserAdd() {
     return (
         <div>
-            <h2>MemberAdd</h2>
+            <h2>Add User</h2>
             <Add />
         </div>
     );
@@ -17,7 +17,7 @@ function Add() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        const member = {
+        const user = {
             name: name,
             email: email,
             description: description,
@@ -25,9 +25,9 @@ function Add() {
         fetch(`${API_URL}/user`, {
             method: "POST",
             body: JSON.stringify({
-                name: member.name,
-                email: member.email,
-                description: member.description,
+                name: user.name,
+                email: user.email,
+                description: user.description,
             }),
         })
             .then((response) => response.json())
@@ -37,7 +37,7 @@ function Add() {
                     return;
                 }
 
-                alert("Member added");
+                alert("User added");
             }
             )
             .catch((error) => {

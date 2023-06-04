@@ -11,20 +11,24 @@ import {
 // Importation des pages
 // AJOUTER ICI LES PAGES
 import Home from './pages/Home';
-import Members from './pages/Members';
+import Users from './pages/Users';
+import RptPanel from './pages/RptPanel';
 import NotFound from './pages/NotFound';
 
 // Création du routeur
 // AJOUTER LES ROUTES ICI
-// on config la page not found
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
   },
   {
-    path: "/members",
-    element: <Members />,
+    path: "/users",
+    element: <Users />,
+  },
+  {
+    path: "/rptpanel",
+    element: <RptPanel />,
   },
   {
     path: "*",

@@ -1,23 +1,18 @@
 <?php
-require_once 'helpers/ApiResponse.php'; // Classe permettant de gérer les réponses de l'API
-require_once 'config/config.php'; // Fichier de configuration
-
-// Traits
-// INCLUEZ VOS TRAITS ICI
-require_once 'traits/UsersTrait.php'; // Trait permettant de gérer la base de données
+foreach (glob("traits/*.php") as $filename) {
+    require_once $filename;
+}
 
 // Classe permettant de gérer la base de données
 class Database
 {
-    // Traits
-    // UTILISEZ VOS TRAITS ICI
+    // UTILISEZ VOS TRAITS ICI (POUR LA GESTION DE LA BASE DE DONNÉES)
     use UsersTrait;
+    // FIN DES TRAITS
 
-    // Propriétés
     private static $instance;
     private $connection;
 
-    // Constructeur
     public function __construct()
     {
         try {
@@ -27,7 +22,6 @@ class Database
         }
     }
 
-    // Méthode pour obtenir l'instance de la classe
     public static function getInstance()
     {
         if (self::$instance === null) {
@@ -36,11 +30,9 @@ class Database
         return self::$instance;
     }
 
-    // Méthode pour obtenir la connexion à la base de données
     public function getConnection()
     {
         return $this->connection;
     }
 }
-
 ?>
