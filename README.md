@@ -105,13 +105,13 @@ Pour ajouter des endpoints, il faut créer un fichier dans le dossier `api/endpo
 <?php
 // GET /ping
 // Endpoint pour vérifier le fonctionnement de l'API (Sans paramètres)
-new Endpoint('GET', '/ping', function () use ($pingController) {
+new Endpoint('GET', '/ping', function () {
     // Code à exécuter...
 });
 
 // GET /ping/{id}
 // Endpoint pour vérifier le fonctionnement de l'API (Avec paramètres)
-new Endpoint('GET', '/ping/{int}', function ($matches) use ($pingController) {
+new Endpoint('GET', '/ping/{int}', function ($matches) {
     // Code à exécuter... ($matches contient les paramètres de l'URL)
 });
 ?>
