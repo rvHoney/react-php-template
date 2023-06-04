@@ -1,5 +1,5 @@
 <?php
-class PingController
+class PingEndpointController
 {
     // Méthode pour vérifier le fonctionnement de l'API sans paramètres
     public function ping()

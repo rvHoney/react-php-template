@@ -9,7 +9,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 
 // Configuration de l'API ---------------------------------------------------------------------
-define('API_PREFIX', '/api'); // Préfixe de l'API
+define('API_PREFIX', '/react-php-template/api'); // Préfixe de l'API
 // --------------------------------------------------------------------------------------------
 
 
@@ -31,6 +31,7 @@ require_once 'models/Database.php'; // Classe pour gérer la base de données
 // IMPORTEZ VOS ENDPOINTS ICI
 require_once 'endpoints/ping.php';
 require_once 'endpoints/users.php';
+require_once 'endpoints/hello.php';
 // --------------------------------------------------------------------------------------------
 
 
@@ -41,11 +42,7 @@ require_once 'endpoints/users.php';
 
 
 // Imports des contrôleurs --------------------------------------------------------------------
-// IMPORTEZ VOS CONTRÔLEURS D'ENDPOINTS ICI
-require_once 'controllers/PingEndpointController.php';
-require_once 'controllers/UsersEndpointController.php';
-// IMPORTEZ VOS AUTRES CONTRÔLEURS ICI
-// require_once 'controllers/...';
+// IMPORTEZ VOS CONTRÔLEURS DIRECTEMENT DANS LES ENDPOINTS
 // --------------------------------------------------------------------------------------------
 
 
