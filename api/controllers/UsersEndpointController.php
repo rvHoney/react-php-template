@@ -1,7 +1,4 @@
 <?php
-require_once 'helpers/ApiResponse.php'; // Classe permettant de gérer les réponses de l'API
-require_once 'models/Database.php'; // On importe la classe Database
-
 class UserController
 {
     private $db;
@@ -14,26 +11,26 @@ class UserController
     // Méthode obtenir tous les utilisateurs
     public function getUsers()
     {
-        $users = $this->db->getUsers();
-        ApiResponse::sendResponse(200, $users);
+        $data = $this->db->getUsers();
+        ApiResponse::sendResponse(200, $data);
     }
 
     // Méthode pour obtenir un utilisateur par son ID
     public function getUserById($userId)
     {
-        $user = $this->db->getUserById($userId);
-        if ($user) {
-            ApiResponse::sendResponse(200, $user);
+        $data = $this->db->getUserById($userId);
+        if ($data) {
+            ApiResponse::sendResponse(200, $data);
         } else {
             ApiResponse::sendResponse(404, 'User not found');
         }
     }
 
     // Méthode pour enregistrer un utilisateur
-    public function addUser($data)
+    public function addUser($userArgs)
     {
-        $result = $this->db->addUser($data);
-        if ($result) {
+        $data = $this->db->addUser($userArgs);
+        if ($data) {
             ApiResponse::sendResponse(200);
         } else {
             ApiResponse::sendResponse(500, 'Error adding user');
@@ -41,10 +38,10 @@ class UserController
     }
 
     // Méthode pour mettre à jour un utilisateur par son ID
-    public function updateUser($userId, $data)
+    public function updateUser($userId, $userArgs)
     {
-        $result = $this->db->updateUser($userId, $data);
-        if ($result) {
+        $data = $this->db->updateUser($userId, $userArgs);
+        if ($data) {
             ApiResponse::sendResponse(200);
         } else {
             ApiResponse::sendResponse(500, 'Error updating user');
@@ -54,8 +51,8 @@ class UserController
     // Méthode pour supprimer un utilisateur par son ID
     public function removeUser($userId)
     {
-        $result = $this->db->removeUser($userId);
-        if ($result) {
+        $data = $this->db->removeUser($userId);
+        if ($data) {
             ApiResponse::sendResponse(200);
         } else {
             ApiResponse::sendResponse(500, 'Error removing user');

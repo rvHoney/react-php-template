@@ -1,21 +1,17 @@
 <?php
-require_once 'helpers/ApiResponse.php'; // Gestion des réponses
-require_once 'config/config.php'; // Fichier de configuration
+require_once 'config.php';
 
-// On stock les requêtes dans un fichier log
-require_once 'helpers/logs.php';
-
-// Récupération des informations de la requête
-$requestMethod = $_SERVER['REQUEST_METHOD'];
-$requestUri = $_SERVER['REQUEST_URI'];
-
-// Suppression du préfixe de l'API de l'URI
-$requestUri = str_replace(API_PREFIX, '', $requestUri);
+LogRequest::SaveLog(); // Sauvegarde la requête dans les logs
 
 // Inclusion des endpoints
 // METTRE À JOUR CETTE LISTE À CHAQUE NOUVEL ENDPOINT
 require_once 'endpoints/ping.php';
 require_once 'endpoints/users.php';
+
+// OPTIONS (Permet d'accepter les requêtes OPTIONS pour les CORS)
+new Endpoint('OPTIONS', '/{any}', function () {
+    ApiResponse::sendResponse(200);
+});
 
 // Endpoint par défaut si l'URI ne correspond à aucun endpoint
 if (!defined('API_ENDPOINT_MATCHED')) {
