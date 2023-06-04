@@ -23,10 +23,15 @@ define('DB_PATH', 'data/database.db'); // Chemin vers la base de données
 // Imports obligatoires -----------------------------------------------------------------------
 require_once 'utils/ApiResponse.php'; // Classe pour gérer les réponses de l'API
 require_once 'utils/Endpoint.php'; // Classe pour gérer les endpoints de l'API
-require_once 'utils/logs.php'; // Fonctions pour gérer les logs de l'API
+require_once 'utils/LogRequest.php'; // Fonctions pour gérer les logs de l'API
 require_once 'models/Database.php'; // Classe pour gérer la base de données
 // --------------------------------------------------------------------------------------------
 
+// Imports des endpoints ----------------------------------------------------------------------
+// IMPORTEZ VOS ENDPOINTS ICI
+require_once 'endpoints/ping.php';
+require_once 'endpoints/users.php';
+// --------------------------------------------------------------------------------------------
 
 
 // Imports des traits -------------------------------------------------------------------------

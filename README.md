@@ -80,7 +80,7 @@ define('API_PREFIX', '/react-php-template/api');
 
 2. **Base de données:**
 Le fichier `api/config.php` contient également les informations de connexion à la base de données. Il faut donc modifier les informations pour que l'API puisse fonctionner correctement.
-Par défaut le projet est fait pour fonctionner avec une base de données SQLite3. En fonction du SGBD utilisé, il faudra modifier le fichier `api/Database.php` pour utiliser le bon driver.
+Par défaut le projet est fait pour fonctionner avec une base de données SQLite3. En fonction du SGBD utilisé, il faudra modifier le fichier `api/models/Database.php` pour utiliser le bon driver et modifier le fichier `config.php` en conséquent.
 ```php
 // api/config.php 
 // Exemple avec ma configuration (SQLite3)
@@ -99,22 +99,25 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
 
 ## Créer des endpoints et générer des réponses 📡
 ### Ajouter un endpoint
-Pour ajouter des endpoints, il faut créer un fichier dans le dossier `api/endpoints` et l'importer dans le fichier `api/index.php`.
+Pour ajouter des endpoints, il faut créer un fichier dans le dossier `api/endpoints` et l'importer dans le fichier `api/config.php`.
 ```php
 // api/endpoints/ping.php
 <?php
-require_once 'config/config.php';
-
 // GET /ping
-// Endpoint pour vérifier le fonctionnement de l'API
-if ($requestUri === '/ping' && $requestMethod === 'GET')
-{
-    ApiResponse::sendResponse(200, 'pong');
-}
+// Endpoint pour vérifier le fonctionnement de l'API (Sans paramètres)
+new Endpoint('GET', '/ping', function () use ($pingController) {
+    // Code à exécuter...
+});
+
+// GET /ping/{id}
+// Endpoint pour vérifier le fonctionnement de l'API (Avec paramètres)
+new Endpoint('GET', '/ping/{int}', function ($matches) use ($pingController) {
+    // Code à exécuter... ($matches contient les paramètres de l'URL)
+});
 ?>
 ```
 ```php
-// api/index.php
+// api/config.php
 require_once 'endpoints/ping.php';
 ```
 
@@ -126,18 +129,17 @@ ApiResponse::sendResponse(200, 'Les données que vous voulez envoyer');
 ```
 
 ### Créer un controller
-Pour créer un controller, il faut créer un fichier dans le dossier `api/controllers` et l'importer dans le fichier de votre endpoint.
+Pour créer un controller, il faut créer un fichier dans le dossier `api/controllers` et l'importer dans le `api/config.php`.
+```php
+// api/config.php
+require_once 'controllers/monController.php';
+```
 
 ### Intéractions avec la base de données
-Pour intéragir avec la base de données il vous faut ajouter un trait à votre base de données. Pour cela rendez-vous dans le fichier `models/traits` puis importez le trait dans le modèle de la base de données (fichier `models/Database.php`).
+Pour intéragir avec la base de données il vous faut ajouter un trait à votre base de données. Pour cela rendez-vous dans le fichier `traits` puis d'utiliser le trait dans le modèle de la base de données (fichier `models/Database.php`).
 ```php
 // models/Database.php
 <?php
-// ...
-
-require_once 'traits/votreTrait.php';
-
-// Classe permettant de gérer la base de données
 class Database
 {
     use votreTrait;
@@ -151,47 +153,42 @@ class Database
 ### Serveur
 ```bash
 api
-├── config
-│   └── config.php
 ├── controllers
-│   └── UsersController.php
+│   ├── PingEndpointController.php
+│   └── UsersEndpointController.php
+├── data
+│   ├── init-db.sql
+│   └── logs.txt
 ├── endpoints
 │   ├── ping.php
 │   └── users.php
-├── index.php
 ├── models
-│   ├── Database.php
-│   └── User.php
-├── data
-│   └── database.db
-├── helpers
-│   ├── ApiResponse.php
-│   └── logs.php
-├── models
-│   ├── Database.php
-│   └── traits
+│   └── Database.php
+├── traits
 │   └── UsersTrait.php
-└── data
-    ├── database.db
-    ├── init-db.sql
-    └── logs.txt
+├── utils
+│   ├── ApiResponse.php
+│   ├── Endpoint.php
+│   └── LogRequest.php
+├── config.php
+└── index.php
 ```
 
 ### Client
 ```bash
 src
 ├── components
-│   ├── MemberAdd.js
-│   ├── MemberCard.js
-│   ├── MemberEdit.js
-│   ├── MemberList.js
-│   ├── MemberSearch.js
+│   ├── UserAdd.js
+│   ├── UserCard.js
+│   ├── UserList.js
+│   └── UserSearch.js
 ├── css
-│   ├── index.css
+│   └── index.css
 ├── pages
 │   ├── Home.js
-│   ├── Members.js
-│   └── NotFound.js
+│   ├── NotFound.js
+│   ├── RptPanel.js
+│   └── Users.js
 ├── utils
 │   └── constants.js
 └── index.js
